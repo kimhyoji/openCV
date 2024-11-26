@@ -1,14 +1,10 @@
 import cv2
 import mediapipe as mp #pip install mediapipe
 
-# Mediapipe 초기화
-mp_face_detection = mp.solutions.face_detection
-mp_drawing = mp.solutions.drawing_utils
-
 # Mediapipe 얼굴 검출 모델 로드
-with mp_face_detection.FaceDetection(model_selection=1, min_detection_confidence=0.5) as face_detection:
+with mp.solutions.face_detection.FaceDetection(model_selection=1, min_detection_confidence=0.5) as face_detection:
     # 이미지 읽기
-    image = cv2.imread('kalina.jpg')  # 얼굴 이미지 경로로 교체
+    image = cv2.imread('karina.jpg')  # 얼굴 이미지 경로로 교체
     rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)  # Mediapipe는 RGB 이미지를 처리
 
     # Mediapipe로 얼굴 검출
@@ -29,9 +25,7 @@ with mp_face_detection.FaceDetection(model_selection=1, min_detection_confidence
             image[y:y + h, x:x + w] = face
 
     # 결과 출력
-    cv2.imshow('Mosaic Image', image)
+    cv2.imshow('Pixelate Image', image)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
-    # 결과 저장
-    cv2.imwrite('../test/mosaic_image.jpg', image)
